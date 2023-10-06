@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TopicResource\Pages;
 use App\Filament\Resources\TopicResource\RelationManagers\SummaryRelationManager;
 use App\Filament\Resources\TopicResource\RelationManagers\TasksRelationManager;
+use App\Models\Classes;
 use App\Models\Subject;
 use App\Models\Topic;
 use App\Models\TopicTheme;
@@ -60,10 +61,9 @@ class TopicResource extends Resource
                             ->preload()
                             ->required(),
 
-                        Select::make('teacher_id')
-                            ->label('Преподаватель')
-                            ->options(User::role('Преподаватель')->pluck('name', 'id'))
-                            ->default(Auth::user()->id)
+                        Select::make('class_id')
+                            ->label('Класс')
+                            ->options(Classes::all()->pluck('title', 'id'))
                             ->required(),
 
                         Select::make('theme_id')
@@ -82,8 +82,8 @@ class TopicResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')->label('Название')->searchable(),
-                TextColumn::make('subject.title')->label('Предмет'),
-                TextColumn::make('teacher.name')->label('Преподаватель'),
+                TextColumn::make('subject.title')->label('Предмет')->searchable(),
+                TextColumn::make('classes.title')->label('Класс'),
                 TextColumn::make('theme.title')->label('Тема'),
             ])
             ->filters([

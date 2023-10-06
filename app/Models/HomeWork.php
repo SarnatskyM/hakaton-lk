@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model
+class HomeWork extends Model
 {
     use HasFactory;
 
-    protected $table = 'media';
+    protected $table = 'homework';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'type_id',
-        'content',
+        'teacher_id',
+        'class_id',
+        'subject_id',
+        'description',
+        'done_at'
     ];
 }

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubjectResource\Pages;
 use App\Models\Subject;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -34,8 +35,12 @@ class SubjectResource extends Resource
                     TextInput::make('title')
                         ->label('Название')
                         ->required(),
+
+                    ColorPicker::make('color')
+                        ->label('Цвет')
+                        ->required()
                 ])
-            ]);
+            ]); 
     }
 
     public static function table(Table $table): Table
@@ -43,6 +48,7 @@ class SubjectResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')->label('Название')->searchable(),
+                TextColumn::make('color')->label('Цвет'),
             ])
             ->filters([
                 //

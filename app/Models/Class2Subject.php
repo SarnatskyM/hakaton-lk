@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model
+class Class2Subject extends Model
 {
     use HasFactory;
 
-    protected $table = 'media';
+    protected $table = 'class2subject';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'type_id',
-        'content',
+        'class_id',
+        'subject_id'
     ];
 }

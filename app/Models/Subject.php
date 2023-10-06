@@ -15,5 +15,6 @@ class Subject extends Model
 
     protected $fillable = [
         'title',
+        'color'
     ];
 }

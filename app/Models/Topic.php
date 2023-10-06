@@ -15,18 +15,15 @@ class Topic extends Model
 
     protected $fillable = [
         'subject_id',
-        'teacher_id',
         'title',
         'description',
-        'theme_id'
+        'theme_id',
+        'class_id',
+        'created_at'
     ];
 
     public function subject(){
         return $this->belongsTo(Subject::class, 'subject_id');
-    }
-
-    public function teacher(){
-        return $this->belongsTo(User::class, 'teacher_id');
     }
 
     public function theme(){
@@ -34,10 +31,14 @@ class Topic extends Model
     }
 
     public function summary(){
-        return $this->hasMany(Summary::class, 'topic_id');
+        return $this->hasMany(Lecture::class, 'topic_id');
     }
 
     public function tasks(){
         return $this->hasMany(Task::class, 'topic_id');
+    }
+
+    public function classes(){
+        return $this->belongsTo(Classes::class, 'class_id');
     }
 }

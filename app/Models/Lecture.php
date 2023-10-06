@@ -5,16 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model
+class Lecture extends Model
 {
     use HasFactory;
 
-    protected $table = 'media';
+    protected $table = 'lecture';
 
     public $timestamps = false;
 
     protected $fillable = [
+        'topic_id',
         'type_id',
-        'content',
+        'title',
+        'description'
     ];
+
+    public function media(){
+        return $this->hasMany(Media::class, 'lecture_id');
+    }
+
+    
 }

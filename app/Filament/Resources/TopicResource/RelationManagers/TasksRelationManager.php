@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources\TopicResource\RelationManagers;
 
-use App\Models\Student2Task;
+use App\Models\TaskType;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-
-use function PHPUnit\Framework\returnSelf;
 
 class TasksRelationManager extends RelationManager
 {
@@ -35,6 +33,11 @@ class TasksRelationManager extends RelationManager
                         ->label("Название")
                         ->required(),
 
+                    Forms\Components\Select::make('type_id')
+                        ->label('Тип задания')
+                        ->preload()
+                        ->options(TaskType::all()->pluck('title', 'id')),
+
                     Forms\Components\RichEditor::make('description')
                         ->label("Описание")
                         ->required(),
@@ -47,7 +50,7 @@ class TasksRelationManager extends RelationManager
 
     public function isReadOnly(): bool
     {
-        if(auth()->user()->roles[0]->id === 1)
+        if (auth()->user()->roles[0]->id !== 2)
             return false;
         return true;
     }
@@ -60,6 +63,7 @@ class TasksRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('title')->label('Название')->searchable(),
                 Tables\Columns\TextColumn::make('description')->label('Описание'),
+                Tables\Columns\TextColumn::make('type.title')->label('Тип задания'),
                 Tables\Columns\TextColumn::make('task_params')->label('Параметры'),
             ])
             ->filters([

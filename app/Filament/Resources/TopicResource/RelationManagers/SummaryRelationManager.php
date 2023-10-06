@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TopicResource\RelationManagers;
 
+use App\Models\LectureType;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
@@ -13,15 +14,15 @@ class SummaryRelationManager extends RelationManager
 {
     protected static string $relationship = 'summary';
 
-    protected static ?string $label = 'Конспект';
+    protected static ?string $label = 'Урок';
 
-    protected static ?string $title = 'Конспект';
+    protected static ?string $title = 'Урок';
 
-    protected static ?string $pluralLabel = 'Конспекты';
+    protected static ?string $pluralLabel = 'Уроки';
 
-    protected static ?string $modelLabel = 'Конспект';
+    protected static ?string $modelLabel = 'Урок';
 
-    protected static ?string $pluralModelLabel = 'Конспекты';
+    protected static ?string $pluralModelLabel = 'Уроки';
 
     public function form(Form $form): Form
     {
@@ -32,9 +33,15 @@ class SummaryRelationManager extends RelationManager
                         ->label("Название")
                         ->required(),
 
+                    Forms\Components\Select::make('type_id')
+                        ->options(LectureType::all()->pluck('title', 'id'))
+                        ->label('Тип')
+                        ->required(),
+
                     Forms\Components\RichEditor::make('description')
                         ->label("Описание")
                         ->required(),
+
                 ])
             ]);
     }

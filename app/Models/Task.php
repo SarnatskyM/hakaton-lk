@@ -19,8 +19,14 @@ class Task extends Model
 
     protected $fillable = [
         'topic_id',
+        'type_id',
         'title',
         'description',
         'task_params',
     ];
+
+
+    public function type(){
+        return $this->belongsTo(TaskType::class, 'type_id');
+    }
 }
