@@ -3,11 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\Student2TaskResource\Pages;
-use App\Filament\Resources\Student2TaskResource\RelationManagers;
 use App\Models\Student2Task;
 use App\Models\Task;
 use App\Models\User;
-use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\RichEditor;
@@ -19,8 +17,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class Student2TaskResource extends Resource
 {
@@ -34,7 +30,7 @@ class Student2TaskResource extends Resource
 
     protected static ?string $modelLabel = 'Домашние задание';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
     public static function form(Form $form): Form
     {
@@ -44,7 +40,7 @@ class Student2TaskResource extends Resource
                 Section::make()->schema([
                     Select::make('student_id')
                         ->label('Ученик')
-                        ->options(User::all()->pluck('name', 'id'))
+                        ->options(User::role('Ученик')->pluck('name', 'id'))
                         ->required(),
 
                     Select::make('task_id')

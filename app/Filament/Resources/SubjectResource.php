@@ -18,13 +18,13 @@ class SubjectResource extends Resource
 
     protected static ?string $navigationGroup = "Справочники";
 
-    protected static ?string $label = 'Subject';
+    protected static ?string $label = 'Предмет';
 
-    protected static ?string $pluralLabel = 'Subject';
+    protected static ?string $pluralLabel = 'Предметы';
 
-    protected static ?string $modelLabel = 'Subject';
+    protected static ?string $modelLabel = 'Предмет';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
 
     public static function form(Form $form): Form
     {

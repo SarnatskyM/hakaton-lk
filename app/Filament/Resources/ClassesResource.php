@@ -24,7 +24,7 @@ class ClassesResource extends Resource
 
     protected static ?string $modelLabel = 'Классы';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 
     public static function form(Form $form): Form
     {

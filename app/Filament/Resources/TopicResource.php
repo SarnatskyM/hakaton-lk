@@ -6,7 +6,6 @@ use App\Filament\Resources\TopicResource\Pages;
 use App\Filament\Resources\TopicResource\RelationManagers\SummaryRelationManager;
 use App\Filament\Resources\TopicResource\RelationManagers\TasksRelationManager;
 use App\Models\Subject;
-use App\Models\Summary;
 use App\Models\Topic;
 use App\Models\TopicTheme;
 use App\Models\User;
@@ -18,7 +17,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\FiltersLayout;
+use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
@@ -29,13 +28,13 @@ class TopicResource extends Resource
 
     protected static ?string $navigationGroup = "Основное";
 
-    protected static ?string $label = 'Topic';
+    protected static ?string $label = 'Тема';
 
-    protected static ?string $pluralLabel = 'Topic';
+    protected static ?string $pluralLabel = 'Темы';
 
-    protected static ?string $modelLabel = 'Topic';
+    protected static ?string $modelLabel = 'Тема';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     public static function form(Form $form): Form
     {
@@ -63,7 +62,7 @@ class TopicResource extends Resource
 
                         Select::make('teacher_id')
                             ->label('Преподаватель')
-                            ->options(User::all()->pluck('name', 'id'))
+                            ->options(User::role('Преподаватель')->pluck('name', 'id'))
                             ->default(Auth::user()->id)
                             ->required(),
 
@@ -93,6 +92,7 @@ class TopicResource extends Resource
                     ->options(Subject::all()->pluck('title', 'id'))
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -117,6 +117,15 @@ class TopicResource extends Resource
             'index' => Pages\ListTopics::route('/'),
             'create' => Pages\CreateTopic::route('/create'),
             'edit' => Pages\EditTopic::route('/{record}/edit'),
+            'view' => Pages\ViewTopic::route('/{record}'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        if (auth()->user()->roles[0]->id === 1) {
+            return parent::getEloquentQuery()->where("teacher_id", auth()->user()->id);
+        }
+        return parent::getEloquentQuery();
     }
 }

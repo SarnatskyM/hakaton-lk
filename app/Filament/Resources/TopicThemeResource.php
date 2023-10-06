@@ -18,13 +18,13 @@ class TopicThemeResource extends Resource
 
     protected static ?string $navigationGroup = "Справочники";
 
-    protected static ?string $label = 'Topic theme';
+    protected static ?string $label = 'Конфигурации темы';
 
-    protected static ?string $pluralLabel = 'Topic theme';
+    protected static ?string $pluralLabel = 'Конфигурации тем';
 
-    protected static ?string $modelLabel = 'Topic theme';
+    protected static ?string $modelLabel = 'Конфигурации тем';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
     public static function form(Form $form): Form
     {

@@ -24,7 +24,7 @@ class MediaTypeContentResource extends Resource
 
     protected static ?string $modelLabel = 'Медиа типы';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     public static function form(Form $form): Form
     {

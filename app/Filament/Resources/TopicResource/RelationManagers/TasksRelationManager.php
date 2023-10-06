@@ -10,6 +10,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 
+use function PHPUnit\Framework\returnSelf;
+
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
@@ -42,6 +44,14 @@ class TasksRelationManager extends RelationManager
                 ])
             ]);
     }
+
+    public function isReadOnly(): bool
+    {
+        if(auth()->user()->roles[0]->id === 1)
+            return false;
+        return true;
+    }
+
 
     public function table(Table $table): Table
     {

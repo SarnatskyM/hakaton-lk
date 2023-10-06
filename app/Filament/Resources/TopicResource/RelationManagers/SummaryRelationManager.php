@@ -8,20 +8,20 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SummaryRelationManager extends RelationManager
 {
     protected static string $relationship = 'summary';
 
-    protected static ?string $label = 'summary';
+    protected static ?string $label = 'Конспект';
 
-    protected static ?string $pluralLabel = 'summary';
+    protected static ?string $title = 'Конспект';
 
-    protected static ?string $modelLabel = 'summary';
+    protected static ?string $pluralLabel = 'Конспекты';
 
-    protected static ?string $pluralModelLabel = 'summary';
+    protected static ?string $modelLabel = 'Конспект';
+
+    protected static ?string $pluralModelLabel = 'Конспекты';
 
     public function form(Form $form): Form
     {
